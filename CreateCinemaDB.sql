@@ -164,5 +164,69 @@ INSERT INTO Genre(Id_Genre,Name_Genre,Parent_Id) VALUES(17,'Adult comedy',13)
 GO
 INSERT INTO Movie(Name_Movie,Duration,Description,Id_Genre) VALUES
 ('John Wick: Chapter 3','02:30:00','After gunning down a member of the High Table -- the shadowy international assassins guild -- legendary hit man John Wick finds himself stripped of the organizations protective services.',12),
-('Pokémon Detective Pikachu','03:00:00','Ace detective Harry Goodman goes mysteriously missing, prompting his 21-year-old son, Tim, to find out what happened. Aiding in the investigation is Harrys former Pokémon partner, wise-cracking, adorable super-sleuth Detective Pikachu.',13)
+('Pokémon Detective Pikachu','03:00:00','Ace detective Harry Goodman goes mysteriously missing, prompting his 21-year-old son, Tim, to find out what happened. Aiding in the investigation is Harrys former Pokémon partner, wise-cracking, adorable super-sleuth Detective Pikachu.',16),
+('Avengers: Endgame','01:40:00','Adrift in space with no food or water, Tony Stark sends a message to Pepper Potts as his oxygen supply starts to dwindle',8),
+('The Hustle','02:00:00','Josephine Chesterfield is a glamorous, seductive British woman who has a penchant for defrauding gullible men out of their money.',17)
 
+GO 
+INSERT INTO DeliveryMovieMethod(Id_Movie,IsMovie3D) VALUES
+(1,0),
+(1,1),
+(2,0),
+(3,0),
+(3,1),
+(4,0)
+
+GO 
+INSERT INTO ScheduleItem(Id_Hall,Id_Movie,StartDate) VALUES
+(1,1,'2019-05-18 12:35:00'),
+(2,1,'2019-05-18 19:35:00'),
+(3,1,'2019-05-18 22:35:00'),
+(4,1,'2019-05-18 9:00:00'),
+(3,2,'2019-05-22 12:35:00'),
+(4,2,'2019-05-26 19:35:00'),
+(1,3,'2019-05-18 12:35:00'),
+(2,3,'2019-05-18 19:35:00'),
+(3,3,'2019-05-18 22:35:00'),
+(4,3,'2019-05-18 9:00:00'),
+(1,3,'2019-05-18 10:35:00'),
+(2,3,'2019-05-18 17:35:00'),
+(3,3,'2019-05-15 20:35:00'),
+(4,3,'2019-05-18 11:00:00'),
+(1,3,'2019-05-21 21:35:00'),
+(2,3,'2019-05-28 10:35:00'),
+(3,3,'2019-05-27 17:35:00'),
+(4,3,'2019-05-26 19:00:00'),
+(1,4,'2019-05-30 12:35:00'),
+(4,4,'2019-05-30 19:35:00')
+
+
+GO
+INSERT INTO TicketsOrder(CustomerName,CustomerPhone) VALUES
+('Den Shvayger',NULL),
+('Asuyh Nashd',NULL),
+('Aswrf Ssdgfs',NULL),
+('Ngjlsfh flskdj',NULL),
+('SDPAfu sdg',NULL)
+
+GO 
+INSERT INTO Ticket(Id_ScheduleItem,Id_Place,Id_TicketsOrder) VALUES
+(1,1,1),
+(7,1,1),
+(11,1,1),
+(15,1,1),
+(19,1,1),
+(1,2,2),
+(7,2,2),
+(11,2,2),
+(15,2,3),
+(11,33,4),
+(15,33,5),
+(19,34,3),
+(2,68,4),
+(12,65,5),
+(16,67,1),
+(8,67,1),
+(8,68,2),
+(12,68,3),
+(8,65,4)

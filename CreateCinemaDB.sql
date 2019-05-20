@@ -46,8 +46,8 @@ GO
 CREATE TABLE DeliveryMovieMethod
 (
 	Id_Movie INT REFERENCES Movie(Id_Movie),
-	IsMovie3D BIT,
-	PRIMARY KEY(Id_Movie,IsMovie3D)
+	DeliveryMethod NVARCHAR(10),
+	PRIMARY KEY(Id_Movie,DeliveryMethod)
 )
 
 CREATE TABLE ScheduleItem
@@ -179,13 +179,16 @@ INSERT INTO Genre(Id_Genre,Name_Genre,Parent_Id,Id_Movie) VALUES(17,'Adult comed
 
 
 GO 
-INSERT INTO DeliveryMovieMethod(Id_Movie,IsMovie3D) VALUES
-(1,0),
-(1,1),
-(2,0),
-(3,0),
-(3,1),
-(4,0)
+INSERT INTO DeliveryMovieMethod VALUES
+(1,'2D'),
+(1,'3D'),
+(2,'2D'),
+(3,'2D'),
+(3,'3D'),
+(4,'2D')
+
+ 
+
 
 GO 
 INSERT INTO ScheduleItem(Id_Hall,Id_Movie,StartDate) VALUES

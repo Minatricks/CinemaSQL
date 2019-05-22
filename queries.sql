@@ -64,7 +64,6 @@ SELECT * FROM AllGenresWithSubGenres
 GO 
 ALTER TABLE ScheduleItem
 ADD IsDeleted BIT 
-
 GO
 UPDATE ScheduleItem
 SET IsDeleted = 0

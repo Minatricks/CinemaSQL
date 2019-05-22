@@ -17,26 +17,25 @@ CREATE PROCEDURE MakeOrder
 	@Name NVARCHAR(100),
 	@Phone NVARCHAR(20),
 	@ScheduleItemId INT,
-	@IdHall INT,
-	@IdPlace INT,
-	@SuccessfulOrder BIT OUTPUT
+	@IdPlace INT
 AS 
-SET @SuccessfulOrder = 0
 DECLARE @IdOrder INT;
-IF ( @IdHall = (SELECT TOP 1 @IdHall FROM Place WHERE Id_Place = @IdPlace) )
-	BEGIN
-	IF( @IdPlace = (SELECT TOP 1 Id_Place FROM Ticket WHERE Id_ScheduleItem = @ScheduleItemId))
-		 PRINT('EROR There is place booked in this hall.');
-	ELSE
-		BEGIN
+BEGIN TRANSACTION;
+	BEGIN TRY 
 		INSERT INTO TicketsOrder(CustomerName,CustomerPhone) VALUES(@Name,@Phone)
-		SET @IdOrder = (SELECT TOP 1 Id_TicketsOrder FROM TicketsOrder ORDER BY Id_TicketsOrder DESC)
+		SET @IdOrder = (SELECT TOP 1 Id_TicketsOrder FROM TicketsOrder WHERE CustomerName = @Name AND CustomerPhone = @Phone)
+			IF @IdOrder = 0 
+				THROW 51000, 'The record does not exist.',11
 		INSERT INTO Ticket(Id_Place,Id_TicketsOrder,Id_ScheduleItem) VALUES (@IdPlace,@IdOrder,@ScheduleItemId)
-		SET @SuccessfulOrder = 1
-		PRINT('Your order has been successfully created.')
-		END
-	END
-ELSE PRINT('EROR There is no such place in this hall.');
+	END TRY
+
+	BEGIN CATCH 
+	 IF @@TRANCOUNT > 0  
+        ROLLBACK TRANSACTION; 
+	END CATCH
+IF @@TRANCOUNT > 0  
+    COMMIT TRANSACTION;  
+
 
 GO
 CREATE TRIGGER CustomScheduleItemDelete

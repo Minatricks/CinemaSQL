@@ -37,12 +37,12 @@ SET @AllProfit = (SELECT SUM(Price) FROM Place JOIN Ticket ON Place.Id_Place = T
 					JOIN ScheduleItem ON Ticket.Id_ScheduleItem = ScheduleItem.Id_ScheduleItem
 					WHERE (MONTH(GETDATE()) - 1) = MONTH(StartDate))
 
-SELECT Name_Movie,CONVERT(VARCHAR,(SUM(Price)/@AllProfit)*100) + ' %' AS profitabilityLastMonth 
+SELECT Movie.Id_Movie,CONVERT(VARCHAR,(SUM(Price)/@AllProfit)*100) + ' %' AS profitabilityLastMonth 
 FROM Place JOIN Ticket ON Place.Id_Place = Ticket.Id_Place
 JOIN ScheduleItem ON Ticket.Id_ScheduleItem = ScheduleItem.Id_ScheduleItem
 JOIN Movie ON ScheduleItem.Id_Movie = Movie.Id_Movie
 WHERE (MONTH(GETDATE()) - 1) = MONTH(StartDate)
-GROUP BY Name_Movie
+GROUP BY Movie.Id_Movie
  
 
 GO
